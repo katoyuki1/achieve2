@@ -1,0 +1,31 @@
+<%= form_for(@blog) do |f| %>
+  <% if @blog.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@blog.errors.count, "error") %> prohibited this blog from being saved:</h2>
+
+      <ul>
+      <% @blog.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_area :content %>
+  </div>
+  
+    <%= f.label :tag_list, "タグ(カンマ区切り)" %><br>
+    <ul id="blog-tags">
+      <%= text_field_tag 'blog[tag_list]', @blog.tag_list.join(',') %>
+    </ul>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
